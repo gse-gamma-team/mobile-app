@@ -96,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return await showDialog(
         context: context,
         builder: (context) {
-          String? fullness;
+          String? pickup;
           return StatefulBuilder(builder: (context, setState) {
             return AlertDialog(
               title: const Text('Trash Bin Report'),
@@ -107,34 +107,16 @@ class _MyHomePageState extends State<MyHomePage> {
                     children: [
                       const Text("Selected the trash bin status:"),
                       RadioListTile(
-                        title: const Text("Empty"),
-                        value: "empty",
-                        groupValue: fullness,
-                        onChanged: (value) { setState(() { fullness = value.toString(); });},
+                        title: const Text("Needs Pick Up"),
+                        value: "pickup",
+                        groupValue: pickup,
+                        onChanged: (value) { setState(() { pickup = value.toString(); });},
                       ),
                       RadioListTile(
-                        title: const Text("Almost empty"),
-                        value: "almost_empty",
-                        groupValue: fullness,
-                        onChanged: (value) { setState(() { fullness = value.toString(); });},
-                      ),
-                      RadioListTile(
-                        title: const Text("Half full"),
-                        value: "half_empty",
-                        groupValue: fullness,
-                        onChanged: (value) { setState(() { fullness = value.toString(); });},
-                      ),
-                      RadioListTile(
-                        title: const Text("Almost full"),
-                        value: "almost_full",
-                        groupValue: fullness,
-                        onChanged: (value) { setState(() { fullness = value.toString(); });},
-                      ),
-                      RadioListTile(
-                        title: const Text("Full"),
-                        value: "full",
-                        groupValue: fullness,
-                        onChanged: (value) { setState(() { fullness = value.toString(); });},
+                        title: const Text("Doesn't Need Pick Up"),
+                        value: "no_pickup",
+                        groupValue: pickup,
+                        onChanged: (value) { setState(() { pickup = value.toString(); });},
                       ),
                     ],
                   )
