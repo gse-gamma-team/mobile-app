@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'PhotoReport.dart';
 
 void main() {
   runApp(const MyApp());
@@ -70,6 +71,11 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ]
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: navigateToPhotoReport,
+        tooltip: 'PhotoReport',
+        child: const Icon(Icons.report_problem),
+      ),
     );
   }
 
@@ -84,14 +90,14 @@ class _MyHomePageState extends State<MyHomePage> {
           icon: Image.asset('assets/trash_bin.png'),
           iconSize: 35,
           onPressed: () async {
-            await showPopUpUp(context);
+            await showTrashReport(context);
           },
         ),
       ),
     );
   }
 
-  Future<Widget> showPopUpUp(BuildContext context) async {
+  Future<Widget> showTrashReport(BuildContext context) async {
 
     return await showDialog(
         context: context,
@@ -144,6 +150,10 @@ class _MyHomePageState extends State<MyHomePage> {
             );}
           );}
     );
+  }
+
+  Future navigateToPhotoReport() async {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => const PhotoReport(title: "Photo Report",)));
   }
 }
 
