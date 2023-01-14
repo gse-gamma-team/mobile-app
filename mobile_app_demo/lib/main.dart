@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'PhotoReport.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -90,7 +92,10 @@ class _MyHomePageState extends State<MyHomePage> {
           icon: Image.asset('assets/trash_bin.png'),
           iconSize: 35,
           onPressed: () async {
-            await showTrashReport(context);
+            bool permission = await _getCurrentPosition();
+            if(permission) {
+              await showTrashReport(context);
+            }
           },
         ),
       ),
@@ -112,6 +117,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       const Text("Selected the trash bin status:"),
+                      const SizedBox(height: 10.0,),
                       RadioListTile(
                         title: const Text("Needs Pick Up"),
                         value: "pickup",
@@ -150,6 +156,38 @@ class _MyHomePageState extends State<MyHomePage> {
             );}
           );}
     );
+  }
+
+  Future<bool> _getCurrentPosition() async {
+    final hasPermission = await _handleLocationPermission();
+    return hasPermission;
+  }
+
+  Future<bool> _handleLocationPermission() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text('Location services are disabled. Please enable the services')));
+      return false;
+    }
+    permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Location permissions are denied')));
+        return false;
+      }
+    }
+    if (permission == LocationPermission.deniedForever) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text('Location permissions are permanently denied, we cannot request permissions.')));
+      return false;
+    }
+    return true;
   }
 
   Future navigateToPhotoReport() async {
