@@ -1,16 +1,16 @@
-# mobile_app_demo
+# mobile_app
 
-A new Flutter application.
+This is a simple flutter app to represent the citizen's platform to submit reports.
 
-## Getting Started
+## Installation and Usage
 
-This project is a starting point for a Flutter application.
+1. Download this project
+2. Install the Android Studio
+3. Open the project inside Android Studio
+4. Select a virtual device to run the application
+5. Open `lib/main.dart` and click `get dependencies`
+6. Run the application
 
-A few resources to get you started if this is your first Flutter project:
+## Demo preview
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![demo](https://user-images.githubusercontent.com/29897562/217620020-0d41a047-ca85-4fb6-a40b-8a93bfb56024.gif)
